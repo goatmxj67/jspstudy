@@ -18,13 +18,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class Quiz03
  */
 @WebServlet("/Quiz04")
-public class Quiz4 extends HttpServlet {
+public class Quiz04 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Quiz4() {
+    public Quiz04() {
         super();
         // TODO Auto-generated constructor stub
     }
