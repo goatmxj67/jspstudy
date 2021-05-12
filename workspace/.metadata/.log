@@ -226,3 +226,12 @@ java.io.IOException: 다른 프로세스가 파일의 한 부분을 잠갔으므
 	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:200)
 	at org.eclipse.egit.ui.internal.staging.StagingView$52.run(StagingView.java:3490)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.wst.html.ui 1 1 2021-05-12 13:58:21.320
+!MESSAGE No line style provider for org.eclipse.wst.html.SCRIPT
+
+!ENTRY org.eclipse.wst.html.ui 1 1 2021-05-12 13:58:21.320
+!MESSAGE No line style provider for org.eclipse.wst.html.SCRIPT
+
+!ENTRY org.eclipse.wst.html.ui 1 1 2021-05-12 13:58:21.321
+!MESSAGE No line style provider for org.eclipse.wst.html.SCRIPT
