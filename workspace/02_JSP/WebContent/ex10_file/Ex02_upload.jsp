@@ -63,16 +63,7 @@
 	
 	<%-- 다운로드 링크 --%>
 	<a href="/02_JSP/ex10_file/Ex03_download.jsp?directory=<%=directory%>&filename=<%=filename%>">다운로드</a>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+																				  <%--<%=filename%>를 <%=multipart.getOriginalFileName("filename")%>로 바꾸면 숫자가 안 붙고 저장된다.--%>
+
 </body>
 </html>
