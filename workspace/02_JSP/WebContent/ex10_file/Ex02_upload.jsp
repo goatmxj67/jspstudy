@@ -61,5 +61,18 @@
 		<li>수정한 날짜: <%=date%></li>
 	</ul>
 	
+	<%-- 다운로드 링크 --%>
+	<a href="/02_JSP/ex10_file/Ex03_download.jsp?directory=<%=directory%>&filename=<%=filename%>">다운로드</a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
