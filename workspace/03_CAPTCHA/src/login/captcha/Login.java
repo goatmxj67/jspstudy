@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * http://localhost:9090/03_CAPTCHA/Login
@@ -35,6 +36,24 @@ public class Login extends HttpServlet {
 		
 		// 1. 네이버에 캡차 키 요청하기
 		String key = CaptchaKey.getCaptchaKey();
+		
+		// Login.java -> Loginvalidation.java  <key전달하기>
+		// 1). request 이용 (2번 전달)
+		// Login.java -> login.jsp -> LoginValidation.java
+		// request.setAttribute("key", key);
+		//				 <input type="hidden" name="key" value="<%=request.getAttribute()%>"> 
+		//							  request.getParameter("key")
+		// 2). session 이용 (1번에 바로 전달)
+		// Login.java -> login.jsp -> LoginValidation.java
+		// session.setAttribute("key", key);
+		//				 session.getAttribute("key")
+		//							  session.getAttribute("key")
+		// session을 구하는 방법 (jsp에선 session 못 구함)(java에서만 구함)
+		// 1. request에서 구한다.
+		// 2. HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
+		session.setAttribute("key", key);  // LoginValidation.java에서 필요함
+		
 		// response.getWriter().write(key);
 		
 		// 2. 네이버에 캡차 이미지 요청하기
