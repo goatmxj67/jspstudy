@@ -107,4 +107,38 @@ public class MemberDAO {
 		return result;
 	}
 	
+	/* 5. 회원정보 변경 */
+	public int updateMember(MemberDTO dto) {  // myPage.jsp에서 받아 온 dto
+		int result = 0;
+		try {
+			sql = "UPDATE MEMBER SET NAME = ?, EMAIL = ? WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getName());
+			ps.setString(2, dto.getEmail());
+			ps.setLong(3, dto.getNo());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnector.getInstance().close(ps, null);
+		}
+		return result;
+	}
+	
+	/* 6. 회원 탈퇴 */
+	public int deleteMember(long no) {  // leave.jsp에서 받아 온 no
+		int result = 0;
+		try {
+			sql = "DELETE FROM MEMBER WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, no);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnector.getInstance().close(ps, null);
+		}
+		return result;
+	}
+	
 }
