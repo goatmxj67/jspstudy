@@ -43,13 +43,16 @@
 					alert('비밀번호 입력을 확인하세요.');
 					event.preventDefault();
 					return false;
-				} else if ('${param.chk}' != true) {
+				} else if ('${param.chk}' != 'true') {
 					alert('아이디 중복 체크를 진행하세요.');
 					event.preventDefault();
 					return false;
 				}
 			})
-			
+			$('#cancel_btn').on('click', function(){
+				location.href = '../index.jsp';
+				// location.href = '/09_MODEL1/index.jsp';
+			})
 		})
 	</script>
 </head>
