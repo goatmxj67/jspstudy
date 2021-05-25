@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import db.util.DBConnector;
 import dto.MemberDTO;
@@ -140,5 +142,31 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	
+	/* 7. 전체 회원 */
+	public List<MemberDTO> selectAll() {
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		try {
+			sql = "SELECT NO, ID, PW, NAME, EMAIL, REGDATE FROM MEMBER";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				MemberDTO dto = new MemberDTO();
+				dto.setNo(rs.getLong(1));
+				dto.setId(rs.getString(2));
+				dto.setPw(rs.getString(3));
+				dto.setName(rs.getString(4));
+				dto.setEmail(rs.getString(5));
+				dto.setRegdate(rs.getDate(6));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnector.getInstance().close(ps, rs);
+		}
+		return list;
+	}
+	
 	
 }
