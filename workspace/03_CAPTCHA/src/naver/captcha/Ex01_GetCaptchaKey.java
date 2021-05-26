@@ -33,6 +33,7 @@ public class Ex01_GetCaptchaKey {
         // System.out.println(responseBody);
         
         // key값을 빼자.
+        //
         JSONParser parser = new JSONParser();
         JSONObject obj = null;
         try {
@@ -43,6 +44,7 @@ public class Ex01_GetCaptchaKey {
         String key = (String)obj.get("key");  // get() 메소드는 Object를 반환하므로 캐스팅 필요
         System.out.println("전달 받은 캡차 키: " + key);
     }
+    //
 
     private static String get(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);

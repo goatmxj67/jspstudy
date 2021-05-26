@@ -28,6 +28,8 @@ public class Ex03_Validation {
         String clientSecret = "V00UJonEUP"; //애플리케이션 클라이언트 시크릿값";
 
         String code = "0"; // 키 발급시 0,  캡차 이미지 비교시 1로 세팅
+        // String key = "YOUR_CAPTCHA_KEY"; // 캡차 키 발급시 받은 키값
+        // String value = "YOUR_INPUT"; // 사용자가 입력한 캡차 이미지 글자값
         String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code;
 
         Map<String, String> requestHeaders = new HashMap<>();
@@ -40,6 +42,7 @@ public class Ex03_Validation {
         // System.out.println(responseBody);
        
         // key값을 빼자.
+        //
         JSONParser parser = new JSONParser();
         JSONObject obj = null;
         try {
@@ -83,6 +86,7 @@ public class Ex03_Validation {
         }
         
     }
+    //
 
     private static String get1(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);
@@ -104,6 +108,19 @@ public class Ex03_Validation {
             con.disconnect();
         }
     }
+    
+    /*
+     private static HttpURLConnection connect(String apiUrl){
+        try {
+            URL url = new URL(apiUrl);
+            return (HttpURLConnection)url.openConnection();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
+        } catch (IOException e) {
+            throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
+        }
+    }
+     */
     
     private static String readBody(InputStream body){
         InputStreamReader streamReader = new InputStreamReader(body);

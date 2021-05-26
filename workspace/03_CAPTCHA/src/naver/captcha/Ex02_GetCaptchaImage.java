@@ -33,6 +33,7 @@ public class Ex02_GetCaptchaImage {
         // System.out.println(responseBody);
         
         // key값을 빼자.
+        //
         JSONParser parser = new JSONParser();
         JSONObject obj = null;
         try {
@@ -53,6 +54,7 @@ public class Ex02_GetCaptchaImage {
 
         System.out.println(responseBody);
     }
+    //
     
     private static String get1(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);
@@ -75,6 +77,39 @@ public class Ex02_GetCaptchaImage {
         }
     }
     
+    /*
+     
+     private static HttpURLConnection connect(String apiUrl){
+        try {
+            URL url = new URL(apiUrl);
+            return (HttpURLConnection)url.openConnection();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
+        } catch (IOException e) {
+            throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
+        }
+    }
+
+    private static String getImage(InputStream is){
+        int read;
+        byte[] bytes = new byte[1024];
+        // 랜덤한 이름으로  파일 생성
+        String filename = Long.valueOf(new Date().getTime()).toString();
+        File f = new File(filename + ".jpg");
+        try(OutputStream outputStream = new FileOutputStream(f)){
+            f.createNewFile();
+            while ((read = is.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+            return "이미지 캡차가 생성되었습니다.";
+        } catch (IOException e) {
+            throw new RuntimeException("이미지 캡차 파일 생성에 실패 했습니다.",e);
+        }
+    }
+     
+     */
+    
+    
     private static String readBody(InputStream body){
         InputStreamReader streamReader = new InputStreamReader(body);
 
@@ -92,6 +127,7 @@ public class Ex02_GetCaptchaImage {
         }
     }
 
+    //
     private static String get2(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);
         try {
@@ -102,7 +138,9 @@ public class Ex02_GetCaptchaImage {
 
             int responseCode = con.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
+            	//
                 return getImage(con.getInputStream());
+                //
             } else { // 에러 발생
                 return error(con.getErrorStream());
             }
@@ -112,6 +150,7 @@ public class Ex02_GetCaptchaImage {
             con.disconnect();
         }
     }
+    //
 
     private static HttpURLConnection connect(String apiUrl){
         try {
