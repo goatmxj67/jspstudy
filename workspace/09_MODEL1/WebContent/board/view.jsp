@@ -3,6 +3,7 @@
 <%@page import="dto.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
 			font-size: 16px;
 		}
 		.container {
-			width: 600px;
+			width: 500px;
 			margin: 100px auto;
 		}
 	</style>
@@ -29,33 +30,51 @@
 		
 		// 2. DAO의 updateHit() 메소드 호출
 		// 자신이 작성한 게시글은 조회수가 늘지 않는다.
+		
 		// 로그인된 사용자 : loginDTO
 		String author1 = ((MemberDTO)session.getAttribute("loginDTO")).getId();
+		// 3. DAO의 selectByIdx() 메소드 호출
 		// 게시글의 작성자 : dto
 		BoardDTO dto = BoardDAO.getInstance().selectByIdx(idx);
 		String author2 = dto.getAuthor();
 		if (!author1.equals(author2)) {
-			BoardDAO.getInstance().updateHit(idx);  // DB에서만 1증가
-			dto.setHit(dto.getHit() + 1);  // 따라서 JAVA에서도 1증가 처리 해야함
+			BoardDAO.getInstance().updateHit(idx);
+			dto.setHit(dto.getHit() + 1);
 		}
 		
-		// 3. DAO의 selectByIdx() 메소드 호출
-		pageContext.setAttribute("dto", dto);
+		// 4. session에 게시글 올리기
+		session.setAttribute("boardDTO", dto);
 	%>
 
 	<div class="container">
 		<h3>게시글 번호</h3>
-		${dto.idx}<br><br>
+		${boardDTO.idx}<br><br>
 		<h3>제목</h3>
-		${dto.title}<br><br>
+		${boardDTO.title}<br><br>
 		<h3>작성자</h3>
-		${dto.author}<br><br>
+		${boardDTO.author}<br><br>
 		<h3>조회수</h3>
-		${dto.hit}<br><br>
+		${boardDTO.hit}<br><br>
 		<h3>작성일</h3>
-		${dto.postdate}<br><br>
+		${boardDTO.postdate}<br><br>
 		<h3>내용</h3>
-		<pre>${dto.content}</pre><br><br>
+		<pre>${boardDTO.content}</pre><br><br>
+		
+		<%-- 작성자는 수정하기/삭제하기를 할 수 있다. --%>
+		<c:if test="${loginDTO.id eq boardDTO.author}">
+			<input type="button" value="수정하기" onclick="location.href='updatePage.jsp'">
+			<input type="button" value="삭제하기" onclick="fn_delete()">
+		</c:if>
+		<input type="button" value="목록으로이동" onclick="location.href='boardList.jsp'">
+		
+		<script>
+			function fn_delete(){
+				if (confirm('삭제할까요?')) {
+					location.href = 'deleteBoard.jsp';
+				}
+			}
+		</script>
+		
 	</div>
 
 </body>
