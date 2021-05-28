@@ -1,5 +1,6 @@
 package controller;
 
+import command.member.JoinPageCommand;
 import command.member.LoginPageCommand;
 import command.member.MemberCommand;
 
@@ -22,6 +23,9 @@ public class CommandMapper {
 		switch (cmd) {
 		case "loginPage.m":
 			command = new LoginPageCommand();
+			break;
+		case "joinPage.m":
+			command = new JoinPageCommand();
 			break;
 		}
 		return command;

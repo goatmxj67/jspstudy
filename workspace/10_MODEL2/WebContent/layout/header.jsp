@@ -25,7 +25,7 @@
 			</a>
 			<nav>
 				<ul>
-					<li><a href="#">회원가입</a></li>
+					<li><a href="/10_MODEL2/joinPage.m">회원가입</a></li>
 					<li><a href="/10_MODEL2/loginPage.m">로그인</a></li>
 					<li><a href="#">마이페이지</a></li>
 				</ul>
