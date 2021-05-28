@@ -119,7 +119,7 @@
 </script>
 
 <div class="join_form">
-	<form id="f" method="post">
+	<form action="join.m" id="f" method="post">
 		<%-- 아이디 --%>
 		<span class="title">아이디</span><br>
 		<input type="text" name="id" id="id" autofocus><br>
@@ -134,10 +134,10 @@
 		<span class="message" id="pw2_message"></span><br>
 		<%-- 이름 --%>
 		<span class="title">이름</span><br>
-		<input type="password" id="name" name="name"><br><br>
+		<input type="text" id="name" name="name"><br><br>
 		<%-- 이메일 --%>
 		<span class="title">이메일</span><br>
-		<input type="password" id="email" name="email"><br>
+		<input type="text" id="email" name="email"><br>
 		<span class="message" id="email_message"></span><br><br>
 		<%-- 인증(캡차, SMS, 이메일) --%>
 		<%-- 약관 동의 --%>
