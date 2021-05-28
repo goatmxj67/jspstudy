@@ -1,6 +1,7 @@
 <%@page import="java.util.Optional"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +26,15 @@
 			</a>
 			<nav>
 				<ul>
-					<li><a href="/10_MODEL2/joinPage.m">회원가입</a></li>
-					<li><a href="/10_MODEL2/loginPage.m">로그인</a></li>
-					<li><a href="#">마이페이지</a></li>
+					<c:if test="${loginDTO == null}">
+						<li><a href="/10_MODEL2/joinPage.m">회원가입</a></li>
+						<li><a href="/10_MODEL2/loginPage.m">로그인</a></li>
+						<li><a href="#">마이페이지</a></li>
+					</c:if>
+					<c:if test="${loginDTO != null}">
+						<li><a href="/10_MODEL2/logout.m">로그아웃</a></li>
+						<li><a href="#">마이페이지</a></li>
+					</c:if>
 				</ul>
 			</nav>
 		</header>
