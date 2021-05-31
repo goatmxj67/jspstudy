@@ -12,13 +12,13 @@ import command.member.UpdateMemberCommand;
 import command.member.UpdatePwCommand;
 import command.member.UpdatePwPageCommand;
 
-public class CommandMapper {
+public class MemberCommandMapper {
 
-	private static CommandMapper instance = new CommandMapper();
-	private CommandMapper() {}
-	public static CommandMapper getInstance() {
+	private static MemberCommandMapper instance = new MemberCommandMapper();
+	private MemberCommandMapper() {}
+	public static MemberCommandMapper getInstance() {
 		if (instance == null) {
-			instance = new CommandMapper();
+			instance = new MemberCommandMapper();
 		}
 		return instance;
 	}
