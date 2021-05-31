@@ -51,6 +51,14 @@
 			f.attr('action', '/10_MODEL2/updateMember.m');
 			f.submit();
 		})
+		
+		const delete_btn = $('#delete_btn');
+		delete_btn.click(function(){
+			if (confirm('탈퇴하겠습니까?')) {
+				location.href = '/10_MODEL2/deleteMember.m';
+			}
+		})
+		
 	})
 </script>
 
@@ -68,7 +76,8 @@
 		<%-- 이메일 --%>
 		<span class="title">이메일</span><br>
 		<input type="text" id="email" name="email" value="${loginDTO.email}"><br><br>
-		<input type="button" value="회원정보수정" id="update_btn">
+		<input type="button" value="회원정보수정" id="update_btn"><br><br>
+		<input type="button" value="회원탈퇴" id="delete_btn">
 	</form>
 </div>
 

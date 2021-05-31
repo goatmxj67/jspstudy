@@ -1,5 +1,6 @@
 package controller;
 
+import command.member.DeleteMemberCommand;
 import command.member.JoinCommand;
 import command.member.JoinPageCommand;
 import command.member.LoginCommand;
@@ -54,6 +55,9 @@ public class CommandMapper {
 			break;
 		case "updateMember.m":
 			command = new UpdateMemberCommand();
+			break;
+		case "deleteMember.m":
+			command = new DeleteMemberCommand();
 			break;
 		}
 		return command;
