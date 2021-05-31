@@ -7,6 +7,8 @@ import command.member.LoginPageCommand;
 import command.member.LogoutCommand;
 import command.member.MemberCommand;
 import command.member.MyPageCommand;
+import command.member.UpdateMemberCommand;
+import command.member.UpdatePwCommand;
 import command.member.UpdatePwPageCommand;
 
 public class CommandMapper {
@@ -46,6 +48,12 @@ public class CommandMapper {
 			break;
 		case "join.m":
 			command = new JoinCommand();
+			break;
+		case "updatePw.m":
+			command = new UpdatePwCommand();
+			break;
+		case "updateMember.m":
+			command = new UpdateMemberCommand();
 			break;
 		}
 		return command;

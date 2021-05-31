@@ -39,6 +39,18 @@
 		pw_btn.click(function(){
 			location.href = '/10_MODEL2/updatePwPage.m';
 		})
+		const update_btn = $('#update_btn');
+		const name = $('#name');
+		const email = $('#email');
+		const f = $('#f');
+		update_btn.click(function(){
+			if (name.val() == '${loginDTO.name}' && email.val() == '${loginDTO.email}') {
+				alert('변경할 정보가 없습니다.')
+				return;
+			}
+			f.attr('action', '/10_MODEL2/updateMember.m');
+			f.submit();
+		})
 	})
 </script>
 
