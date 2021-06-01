@@ -247,6 +247,47 @@ public class BoardDAO {
 		return list;
 	}
 	
+	/* 9. 게시글 삭제 */
+	public int deleteBoard(long idx) {
+		int result = 0;
+		try {
+			con = dataSource.getConnection();
+			sql = "UPDATE BOARD SET STATE = -1 WHERE IDX = ?";
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, idx);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		return result;
+	}
+	
+	/* 10. 게시글 수정 */
+	public int updateBoard(BoardDTO dto) {
+		int result = 0;
+		try {
+			con = dataSource.getConnection();
+			sql = "UPDATE BOARD SET TITLE = ?, CONTENT = ?, FILENAME = ?, LASTMODIFIED = SYSDATE WHERE IDX = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getTitle());
+			ps.setString(2, dto.getContent());
+			ps.setString(3, dto.getFilename());
+			ps.setLong(4, dto.getIdx());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

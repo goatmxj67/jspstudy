@@ -38,6 +38,7 @@
 		</select>
 		<input type="text" name="query">
 		<button>검색</button>
+		<input type="button" value="전체목록보기" onclick="location.href='/10_MODEL2/selectListBoardPage.b'">
 	</form><br><br>
 	
 	<%-- 로그인을 해야만 게시글을 작성할 수 있다. --%>
@@ -51,7 +52,7 @@
 	<table>
 		<thead>
 			<tr>
-				<td>게시글번호</td>
+				<td>순번</td>
 				<td>제목</td>
 				<td>작성자</td>
 				<td>조회수</td>
@@ -59,14 +60,22 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="dto" items="${list}">
-				<tr>
-					<td>${dto.idx}</td>
-					<td><a href="/10_MODEL2/selectOneBoard.b?idx=${dto.idx}">${dto.title}</a></td>
-					<td>${dto.author}</td>
-					<td>${dto.hit}</td>
-					<td>${dto.lastmodified}</td>
-				</tr>
+			<c:forEach var="dto" items="${list}" varStatus="k">
+				<c:if test="${dto.state == -1}">
+					<tr>
+						<td>${seq - k.index}</td>
+						<td colspan="4">삭제된 게시글로 비공개 처리되었습니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${dto.state == 0}">
+					<tr>
+						<td>${seq - k.index}</td>
+						<td><a href="/10_MODEL2/selectOneBoard.b?idx=${dto.idx}">${dto.title}</a></td>
+						<td>${dto.author}</td>
+						<td>${dto.hit}</td>
+						<td>${dto.lastmodified}</td>
+					</tr>
+				</c:if>
 			</c:forEach>
 		</tbody>
 		<tfoot>

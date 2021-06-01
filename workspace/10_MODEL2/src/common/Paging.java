@@ -26,7 +26,11 @@ public class Paging {
 		if (beginPage <= pagePerBlock) {  // if (beginPage == 1)
 			sb.append("이전&nbsp;");
 		} else {
-			sb.append("<a href=\"" + path + "?page=" + (beginPage - 1) + "\">이전&nbsp;</a>");
+			if (path.contains("?")) {
+				sb.append("<a href=\"" + path + "&page=" + (beginPage - 1) + "\">이전&nbsp;</a>");
+			} else {
+				sb.append("<a href=\"" + path + "?page=" + (beginPage - 1) + "\">이전&nbsp;</a>");
+			}
 		}
 		
 		// 1 2 3 4 5
@@ -34,7 +38,11 @@ public class Paging {
 			if (p == page) {
 				sb.append(p + "&nbsp;");
 			} else {
-				sb.append("<a href=\"" + path + "?page=" + p + "\">" + p + "&nbsp;</a>");
+				if (path.contains("?")) {
+					sb.append("<a href=\"" + path + "&page=" + p + "\">" + p + "&nbsp;</a>");
+				} else {
+					sb.append("<a href=\"" + path + "?page=" + p + "\">" + p + "&nbsp;</a>");
+				}
 			}
 		}
 		
@@ -42,7 +50,11 @@ public class Paging {
 		if (endPage == totalPage) {
 			sb.append("다음");
 		} else {
-			sb.append("<a href=\"" + path + "?page=" + (endPage + 1) + "\">다음</a>");
+			if (path.contains("?")) {
+				sb.append("<a href=\"" + path + "&page=" + (endPage + 1) + "\">다음</a>");
+			} else {
+				sb.append("<a href=\"" + path + "?page=" + (endPage + 1) + "\">다음</a>");
+			}
 		}
 		
 		return sb.toString();

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.ModelAndView;
+import common.Paging;
 import dao.BoardDAO;
 import dto.BoardDTO;
 
@@ -51,9 +52,16 @@ public class FindBoardCommand implements BoardCommand {
 		// DAO의 selectFindList() 메소드 호출
 		List<BoardDTO> list = BoardDAO.getInstance().selectFindList(map);
 		
+		// 페이징 처리
+		// 검색 결과를 페이징 처리하는 경우
+		// 검색 관련 파라미터를 Paging 클래스에 전달해야 한다.
+		String paging = Paging.getPaging("/10_MODEL2/findBoard.b?column=" + column + "&query=" + query, totalRecord, recordPerPage, page);
+		
 		// 응답View로 전달할 데이터
 		request.setAttribute("totalRecord", totalRecord);
 		request.setAttribute("list", list);
+		request.setAttribute("paging", paging);
+		request.setAttribute("seq", totalRecord - (page - 1) * recordPerPage);
 		
 		ModelAndView mav = new ModelAndView("/board/listBoard.jsp", false);  // 포워드 이동
 		return mav;
