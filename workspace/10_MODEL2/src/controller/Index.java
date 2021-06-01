@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/index.do")
-public class index extends HttpServlet {
+public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public index() {
+    public Index() {
         super();
     }
 
