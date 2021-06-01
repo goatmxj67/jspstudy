@@ -29,6 +29,17 @@
 </style>
 <div class="board_list">
 	
+	<%-- 검색 기능 --%>
+	<form action="/10_MODEL2/findBoard.b">
+		<select name="column">
+			<option value="TITLE">제목</option>
+			<option value="CONTENT">내용</option>
+			<option value="AUTHOR">작성자</option>
+		</select>
+		<input type="text" name="query">
+		<button>검색</button>
+	</form><br><br>
+	
 	<%-- 로그인을 해야만 게시글을 작성할 수 있다. --%>
 	<c:if test="${loginDTO != null}">
 		<br>
@@ -51,7 +62,7 @@
 			<c:forEach var="dto" items="${list}">
 				<tr>
 					<td>${dto.idx}</td>
-					<td>${dto.title}</td>
+					<td><a href="/10_MODEL2/selectOneBoard.b?idx=${dto.idx}">${dto.title}</a></td>
 					<td>${dto.author}</td>
 					<td>${dto.hit}</td>
 					<td>${dto.lastmodified}</td>
