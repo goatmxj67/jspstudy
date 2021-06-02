@@ -10,7 +10,6 @@ INDEX VERSION 1.131+C:\spring0303\jspstudy\workspace\.metadata\.plugins\org.ecli
 55462549.index
 2594392019.index
 2831692061.index
-1833460770.index
 300009817.index
 1936504945.index
 2729129757.index
