@@ -25,5 +25,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				0  <!-- 게시글(0)/댓글(1 이상) 구분 -->
 		)
 	</insert>
+	
+	<select id="getTotalRecord" resultType="int">
+		SELECT COUNT(NO)
+		  FROM BOARD
+	</select>
+	
+	<select id="selectList" parameterType="Map" resultType="dto.BoardDTO">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT *
+		  		  		  FROM BOARD
+		  		  		 ORDER BY POSTDATE DESC) A ) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
 
 </mapper>

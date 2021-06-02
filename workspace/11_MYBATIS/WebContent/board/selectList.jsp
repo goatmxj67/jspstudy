@@ -8,5 +8,8 @@
 </head>
 <body>
 	<a href="/11_MYBATIS/insertPage.do">새글작성</a>
+	<br><br><br>
+	${totalRecord}<br>
+	${paging}
 </body>
 </html>
