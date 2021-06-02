@@ -41,6 +41,7 @@ public class SelectListCommand implements BoardCommand {
 		request.setAttribute("list", list);
 		request.setAttribute("totalRecord", totalRecord);
 		request.setAttribute("paging", paging);
+		request.setAttribute("seq", totalRecord - (page - 1) * recordPerPage);
 		
 		return new ModelAndView("/board/selectList.jsp", false);  // 포워드
 	}
