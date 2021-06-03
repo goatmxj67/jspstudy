@@ -7,7 +7,7 @@ import common.ModelAndView;
 import dao.BoardDAO;
 import dto.BoardDTO;
 
-public class InsertReplyCommand implements BoardCommand {
+public class InsertReplyCommand2 implements BoardCommand {
 
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -37,7 +37,7 @@ public class InsertReplyCommand implements BoardCommand {
 		int result = BoardDAO.getInstance().insertReply(replyDTO);
 		
 		// 이동
-		return new ModelAndView("/11_MYBATIS/board/insertReplyResult.jsp?result=" + result, true);  // 삽입 후에는 반드시 리다이렉트한다.
+		return new ModelAndView("/11_MYBATIS/board/insertReplyResult2.jsp?result=" + result, true);  // 삽입 후에는 반드시 리다이렉트한다.
 		
 	}
 

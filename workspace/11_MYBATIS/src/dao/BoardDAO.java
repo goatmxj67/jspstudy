@@ -76,6 +76,41 @@ public class BoardDAO {
 		return result;
 	}
 	
+	/* 6. 검색 결과 개수 반환 */
+	public int getFindRecordCount(Map<String, Object> map) {
+		SqlSession ss = factory.openSession();
+		int count = ss.selectOne(NAMESPACE + ".getFindRecordCount", map);
+		ss.close();
+		return count;
+	}
+	
+	/* 7. 검색 결과 반환 */
+	public List<BoardDTO> findList(Map<String, Object> map) {
+		SqlSession ss = factory.openSession();
+		List<BoardDTO> list = ss.selectList(NAMESPACE + ".findList", map);
+		ss.close();
+		return list;
+	}
+	
+	/* 8. 삭제 */
+	public int delete(long no) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.delete(NAMESPACE + ".delete", no);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	
+	/* 9. 대댓글 목록 */
+	public List<BoardDTO> selectList3(Map<String, Integer> map) {
+		SqlSession ss = factory.openSession();
+		List<BoardDTO> list = ss.selectList("mybatis.mapper.board.selectList3", map);
+		ss.close();
+		return list;
+	}
+	
 	
 	
 	
