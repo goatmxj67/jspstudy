@@ -25,6 +25,7 @@ public class InsertReplyCommand3 implements BoardCommand {
 		replyDTO.setTitle(title);
 		replyDTO.setContent(content);
 		replyDTO.setIp(ip);
+
 		
 		// 원글 정보 가져오기 (DAO 작업)
 		
@@ -35,7 +36,7 @@ public class InsertReplyCommand3 implements BoardCommand {
 		// 같은 그룹의 기존 댓글들 중에서
 		// groupord가 가져온 원글(부모)의 groupord보다 큰 댓글들의
 		// groupord를 1씩 증가
-
+		
 		
 		// 댓글 삽입하기
 		int result = BoardDAO.getInstance().insertReply(replyDTO);

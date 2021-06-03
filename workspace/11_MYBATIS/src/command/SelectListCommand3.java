@@ -36,14 +36,15 @@ public class SelectListCommand3 implements BoardCommand {
 		
 		List<BoardDTO> list = BoardDAO.getInstance().selectList3(map);
 		
-		String paging = Paging.getPaging("/11_MYBATIS/selectList2.do", totalRecord, recordPerPage, page);
+		String paging = Paging.getPaging("/11_MYBATIS/selectList3.do", totalRecord, recordPerPage, page);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("totalRecord", totalRecord);
 		request.setAttribute("paging", paging);
 		request.setAttribute("seq", totalRecord - (page - 1) * recordPerPage);
 		
-		return new ModelAndView("/board/selectList3.jsp", false);  // 포워드
+		return new ModelAndView("board/selectList3.jsp", false);  // 포워드
+		
 	}
 
 }

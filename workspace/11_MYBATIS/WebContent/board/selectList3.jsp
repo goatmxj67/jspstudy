@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +55,9 @@
 			<option value="AUTHOR">작성자</option>
 			<option value="BOTH">내용+작성자</option>
 		</select>
-		<input type="text" name="query"><button>검색</button>
+		<input type="text" name="query">
+		<button>검색</button>
+		<input type="button" value="전체" onclick="location.href='/11_MYBATIS/selectList.do'">
 	</form>
 	<br>
 	
@@ -90,7 +92,7 @@
 								</c:if>
 								${dto.title} 
 								<a class="link">답글</a>
-								<%-- 
+								<%--
 								<c:if test="${loginDTO.id == dto.author}">
 									<a href="">삭제</a>
 								</c:if>

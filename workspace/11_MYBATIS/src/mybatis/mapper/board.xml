@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="mybatis.mapper.board">
 
 	<!-- INSERT, UPDATE, DELETE문에 resultType을 작성하지 않는다. -->
+	
 	<insert id="insertBoard" parameterType="dto.BoardDTO">
 		INSERT INTO
 		 BOARD
@@ -26,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				0  <!-- 게시글(0)/댓글(1 이상) 구분 -->
 		)
 	</insert>
-	
+
 	<select id="getTotalRecord" resultType="int">
 		SELECT COUNT(NO)
 		  FROM BOARD
@@ -41,14 +42,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  		  		 ORDER BY GROUPNO DESC, DEPTH ASC, GROUPORD DESC) A ) B
 		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
-	
-	<update id="increaseGroupordPreviousReply" parameterType="long">
+
+	<update id="increseGroupordPreviousReply" parameterType="long">
 		UPDATE BOARD
 		   SET GROUPORD = GROUPORD + 1
 		 WHERE GROUPNO = ${groupno}
 		   AND DEPTH = 1
 	</update>
-	
+
 	<insert id="insertReply" parameterType="dto.BoardDTO">
 		INSERT INTO
 		 BOARD
@@ -61,9 +62,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				SYSDATE,  <!-- 작성일 -->
 				SYSDATE,  <!-- 최종수정일 -->
 				0,  <!-- 정상: 0, 삭제: -1 -->
-				${groupno},  
-				${groupord},  
-				${depth}  
+				${groupno},
+				${groupord},
+				${depth}
 		)
 	</insert>
 
@@ -72,13 +73,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM BOARD
 		 WHERE STATE = 0
 		   AND <if test="column != 'BOTH'">${column} LIKE #{query}</if>
-		   	   <if test="column == 'BOTH'">TITLE LIKE #{query} OR AUTHOR LIKE #{query}</if>
+		       <if test="column == 'BOTH'">TITLE LIKE #{query} OR AUTHOR LIKE #{query}</if>
 		<!--
-			#{column} : 'TITLE' , 'AUTHOR' , 'BOTH' 
-			${column} : TITLE , AUTHOR , BOTH 
+			#{column} : 'TITLE' , 'AUTHOR' , 'BOTH'
+			${column} : TITLE , AUTHOR , BOTH
+			#{query}  : '%검색어%'
 		-->
 	</select>
-	
+
 	<select id="findList" parameterType="Map" resultType="dto.BoardDTO">
 		SELECT B.*
 		  FROM (SELECT ROWNUM AS RN, A.*
@@ -88,7 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  		  		   AND <if test="column != 'BOTH'">${column} LIKE #{query}</if>
 		  		  		       <if test="column == 'BOTH'">TITLE LIKE #{query} OR AUTHOR LIKE #{query}</if>
 		  		  		 ORDER BY GROUPNO DESC, DEPTH ASC, GROUPORD DESC) A ) B
-		 WHERE B.RN BETWEEN ${beginRecord} AND ${endRecord}
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
 
 	<update id="delete" parameterType="long">
@@ -106,5 +108,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  		  		 ORDER BY GROUPNO DESC, GROUPORD ASC) A ) B
 		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
+
 
 </mapper>

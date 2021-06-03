@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
 <body>
 	<a href="/11_MYBATIS/insertPage.do">새글작성</a>
@@ -17,7 +17,9 @@
 			<option value="AUTHOR">작성자</option>
 			<option value="BOTH">내용+작성자</option>
 		</select>
-		<input type="text" name="query"><button>검색</button>
+		<input type="text" name="query">
+		<button>검색</button>
+		<input type="button" value="전체" onclick="location.href='/11_MYBATIS/selectList.do'">
 	</form>
 	<br>
 	
@@ -48,16 +50,12 @@
 							</c:if>
 							${dto.title} 
 							<c:if test="${dto.depth == 0}">
-								<font size="1"><a href="/11_MYBATIS/insertReplyPage.do?groupno=${dto.groupno}">답글</a></font>
+								<a id="link" href="/11_MYBATIS/insertReplyPage.do?groupno=${dto.groupno}"><font size="1">답글</font></a>
 							</c:if>
 						</td>
 						<td>${dto.author}</td>
 						<td>${dto.lastmodified}</td>
 						<td>${dto.hit}</td>
-					</tr>
-					<tr class="insert_reply">
-						<!--  댓글 작성란 -->
-						
 					</tr>
 				</c:forEach>
 			</c:if>

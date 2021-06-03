@@ -43,7 +43,8 @@ public class SelectListCommand2 implements BoardCommand {
 		request.setAttribute("paging", paging);
 		request.setAttribute("seq", totalRecord - (page - 1) * recordPerPage);
 		
-		return new ModelAndView("/board/selectList2.jsp", false);  // 포워드
+		return new ModelAndView("board/selectList2.jsp", false);  // 포워드
+		
 	}
 
 }

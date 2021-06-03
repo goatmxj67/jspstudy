@@ -6,10 +6,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-// 역할 : SqlSessionFactory를 빌드해서 DAO에게 넘겨준다.
+// 역할 : SqlSessionFactory를 빌드해서 DAO에게 넘겨준다. 
 
 public class DBService {
-
+	
 	// Singleton
 	private static DBService instance = new DBService();
 	private SqlSessionFactory factory;
@@ -31,9 +31,8 @@ public class DBService {
 		}
 		return instance;
 	}
-	
 	public SqlSessionFactory getFactory() {
 		return factory;
 	}
-	
+
 }

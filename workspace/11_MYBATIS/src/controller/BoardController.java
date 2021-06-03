@@ -14,6 +14,8 @@ import command.FindListCommand;
 import command.InsertCommand;
 import command.InsertPageCommand;
 import command.InsertReplyCommand1;
+import command.InsertReplyCommand2;
+import command.InsertReplyCommand3;
 import command.InsertReplyPageCommand;
 import command.SelectListCommand1;
 import command.SelectListCommand2;
@@ -55,17 +57,15 @@ public class BoardController extends HttpServlet {
 		case "insertReplyPage.do":
 			command = new InsertReplyPageCommand();
 			break;
-		case "insertReply.do":
+		case "insertReply1.do":
 			command = new InsertReplyCommand1();
 			break;
-		/*
-		case "insertReply.do":
-			command = new InsertReplyCommand();
+		case "insertReply2.do":
+			command = new InsertReplyCommand2();
 			break;
-		case "insertReply.do":
-			command = new InsertReplyCommand();
+		case "insertReply3.do":
+			command = new InsertReplyCommand3();
 			break;
-		*/
 		case "findList.do":
 			command = new FindListCommand();
 			break;
@@ -77,19 +77,19 @@ public class BoardController extends HttpServlet {
 		if (command != null) {
 			try {
 				mav = command.execute(request, response);
-			} catch (Exception e) {
+			} catch(Exception e) {
 				e.printStackTrace();
 			}
-		} 
+		}
 		
 		if (mav != null) {
 			if (mav.isRedirect()) {
 				response.sendRedirect(mav.getView());
 			} else {
 				request.getRequestDispatcher(mav.getView()).forward(request, response);
-			}
+			}			
 		}
-				
+		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

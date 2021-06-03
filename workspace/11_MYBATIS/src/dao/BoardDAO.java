@@ -55,9 +55,9 @@ public class BoardDAO {
 	}
 	
 	/* 4. 같은 그룹 기존 댓글들의 groupord 증가 */
-	public int increaseGroupordPreviousReply(long groupno) {
+	public int increseGroupordPreviousReply(long groupno) {
 		SqlSession ss = factory.openSession(false);  // 직접 커밋하겠다.
-		int result = ss.update("mybatis.mapper.board.increaseGroupordPreviousReply", groupno);
+		int result = ss.update("mybatis.mapper.board.increseGroupordPreviousReply", groupno);
 		if (result > 0) {
 			ss.commit();
 		}
@@ -110,6 +110,12 @@ public class BoardDAO {
 		ss.close();
 		return list;
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

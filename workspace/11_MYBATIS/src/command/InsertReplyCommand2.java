@@ -29,9 +29,9 @@ public class InsertReplyCommand2 implements BoardCommand {
 		replyDTO.setDepth(1);  // 댓글의 depth는 1이다.
 		
 		// 그룹 내부 순서는 1을 가진다.
-		replyDTO.setGroupord(1);  
-		// 기존 댓글들의 groupord를 모두 1씩 증가시킨다.  
-		BoardDAO.getInstance().increaseGroupordPreviousReply(groupno);  // groupno 전달
+		replyDTO.setGroupord(1);
+		// 기존 댓글들의 groupord를 모두 1씩 증가시킨다.
+		BoardDAO.getInstance().increseGroupordPreviousReply(groupno);  // groupno 전달
 		
 		// 댓글 삽입하기
 		int result = BoardDAO.getInstance().insertReply(replyDTO);
