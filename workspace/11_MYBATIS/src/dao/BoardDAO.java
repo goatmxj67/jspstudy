@@ -38,7 +38,7 @@ public class BoardDAO {
 		return result;
 	}
 	
-	/* 전체 레코드 개수 */
+	/* 2. 전체 레코드 개수 */
 	public int getTotalRecord() {
 		SqlSession ss = factory.openSession();  // 커밋이 필요 없는 SELECT문
 		int count = ss.selectOne("mybatis.mapper.board.getTotalRecord");
@@ -53,6 +53,29 @@ public class BoardDAO {
 		ss.close();
 		return list;
 	}
+	
+	/* 4. 같은 그룹 기존 댓글들의 groupord 증가 */
+	public int increaseGroupordPreviousReply(long groupno) {
+		SqlSession ss = factory.openSession(false);  // 직접 커밋하겠다.
+		int result = ss.update("mybatis.mapper.board.increaseGroupordPreviousReply", groupno);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	
+	/* 5. 댓글 삽입하기 */
+	public int insertReply(BoardDTO replyDTO) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.insert(NAMESPACE + ".insertReply", replyDTO);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	
 	
 	
 	
