@@ -15,4 +15,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   AND PW = #{pw}
 	</select>
 
+	<select id="idCheck" parameterType="String" resultType="dto.Member">
+		SELECT ID
+		  FROM MEMBER
+		 WHERE ID = #{id}
+	</select>
+
+	<insert id="join" parameterType="dto.Member">
+		INSERT INTO MEMBER
+		VALUES (MEMBER_SEQ.NEXTVAL, #{id}, #{pw}, #{name}, #{email}, #{phone}, SYSTIMESTAMP)
+	</insert>
+	
+	<update id="updatePw" parameterType="dto.Member">
+		UPDATE MEMBER
+		   SET PW = #{pw}
+		 WHERE NO = ${no}
+	</update>
+
+	<update id="updateMember" parameterType="dto.Member">
+		UPDATE MEMBER
+		   SET NAME = #{name}, PHONE = #{phone}, EMAIL = #{email}
+		 WHERE NO = ${no}
+	</update>
+	
+	<delete id="deleteMember" parameterType="int">
+		DELETE
+		  FROM MEMBER
+		 WHERE NO = ${no}
+	</delete>
+
 </mapper>
