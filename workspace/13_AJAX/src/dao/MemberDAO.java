@@ -62,7 +62,16 @@ public class MemberDAO {
 		return result;
 	}
 	
-	
+	/* 5. 회원 삭제하기 */
+	public int deleteMember(long no) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.delete("dao.member.deleteMember", no);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	

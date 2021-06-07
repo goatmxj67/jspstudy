@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.DeleteMemberCommand;
 import command.InsertMemberCommand;
 import command.MemberCommand;
 import command.SelectMemberByNoCommand;
@@ -41,6 +42,9 @@ public class MemberController extends HttpServlet {
 				break;
 		case "insertMember.do":
 			command = new InsertMemberCommand();
+				break;
+		case "deleteMember.do":
+			command = new DeleteMemberCommand();
 				break;
 		}
 		

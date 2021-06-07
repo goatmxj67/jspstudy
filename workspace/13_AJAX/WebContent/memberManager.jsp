@@ -14,6 +14,7 @@
 			updateMember();
 			init();
 			insertMember();
+			deleteMember();
 		})
 		// 함수
 		// 1. 회원 목록 가져오기
@@ -188,6 +189,40 @@
 						alert('회원 등록이 실패했습니다.');
 					}
 				})
+			})
+		}
+		// 6. 회원 삭제하기
+		function deleteMember() {
+			$('body').on('click', '#delete_btn', function(){
+				/*
+					<tr>
+						<td>
+							<input type="button" value="삭제" id="delete_btn">
+						</td>
+						<input type="hidden" name="no" value="5">
+					</tr>
+				*/
+				var no = $(this).parent().parent().find('input:hidden[name="no"]').val();
+				if (confirm(no + '번 회원을 삭제할까요?')) {
+					$.ajax({
+						url: '/13_AJAX/deleteMember.do',
+						type: 'get',
+						data: 'no=' + no,
+						dataType: 'json',
+						success: function(result) {
+							if (result.isSuccess) {
+								alert('회원 정보가 삭제되었습니다.');
+								selectMemberList();
+							} else {
+								alert('삭제된 회원이 없습니다.')
+							}
+						},
+						error: function(xhr, status, error) {
+							console.log(status + " : " + error);
+							alert('회원 삭제가 실패했습니다.');
+						}
+					})
+				}
 			})
 		}
 	</script>
