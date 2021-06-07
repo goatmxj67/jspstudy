@@ -40,6 +40,29 @@ public class MemberDAO {
 		return member;
 	}
 	
+	/* 3. 회원 정보 수정하기 */
+	public int updateMember(Member member) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.update("dao.member.updateMember", member);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	
+	/* 4. 회원 삽입하기 */
+	public int insertMember(Member member) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.insert("dao.member.insertMember", member);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	
+	
 	
 	
 	

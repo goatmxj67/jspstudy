@@ -11,6 +11,9 @@
 		$(document).ready(function(){
 			selectMemberList();
 			selectMemberByNo();
+			updateMember();
+			init();
+			insertMember();
 		})
 		// 함수
 		// 1. 회원 목록 가져오기
@@ -39,6 +42,10 @@
 							"isExist":true
 						}	
 					*/
+					
+					// 기존의 목록을 화면에서 제거
+					$('#memberList').empty();
+					
 					if (result.isExist) {  // 목록이 있다면,
 						generateMemberList(result.list);
 					} else {
@@ -99,6 +106,8 @@
 							$('#name').val(result.name);
 							$('.left input:radio[name="gender"][value="' + result.gender + '"]').prop('checked', true);
 							$('#address').val(result.address);
+							$('.left input:hidden[name="no"]').remove();  // 기존 hidden 제거
+							$('.left').append( $('<input type="hidden" name="no">').val(result.no) );  // 새 hidden 추가
 						} else {
 							alert('해당 회원 정보를 확인할 수 없습니다.');
 						}
@@ -106,6 +115,77 @@
 					error: function(xhr, status, error) {
 						console.log(status + " : " + error);
 						alert('회원 정보 로드를 실패했습니다.');
+					}
+				})
+			})
+		}
+		// 3. 회원 정보 수정하기
+		function updateMember() {
+			$('#update_btn').click(function(){
+				// 서버로 JSON 데이터 보내기
+				var obj = {
+					"no": $('input:hidden[name="no"]').val(),
+					"id": $('#id').val(),
+					"name": $('#name').val(),
+					"gender": $('input:radio[name="gender"]:checked').val(),
+					"address": $('#address').val()
+				};
+				// console.log(JSON.stringify(obj));
+				$.ajax({
+					url: '/13_AJAX/updateMember.do',
+					type: 'post',
+					data: 'member=' + JSON.stringify(obj),
+					dataType: 'json',
+					success: function(result) {
+						if (result.isSuccess) {
+							alert('회원 정보가 수정되었습니다.');
+							selectMemberList();  // 회원 목록을  다시 만들기
+						} else {
+							alert('변경된 회원 정보가 없습니다.')
+						}
+					},
+					error: function(xhr, status, error) {
+						console.log(status + " : " + error);
+						alert('회원 정보 수정이 실패했습니다.');
+					}
+				})
+			})
+		}
+		// 4. 초기화
+		function init() {
+			$('#init_btn').click(function(){
+				$('#id').val('');
+				$('#name').val('');
+				$('input:radio[name="gender"]').prop('checked', false);
+				$('#address').val('');
+			})
+		}
+		// 5. 회원 추가하기
+		function insertMember() {
+			$('#insert_btn').click(function(){
+				var obj = {
+						id: $('#id').val(),
+						name: $('#name').val(),
+						gender: $('input:radio[name="gender"]:checked').val(),
+						address: $('#address').val()
+				};
+				// console.log(JSON.stringify(obj));
+				$.ajax({
+					url: '/13_AJAX/insertMember.do',
+					type: 'post',
+					data: 'member=' + JSON.stringify(obj),
+					dataType: 'json',
+					success: function(result) {
+						if (result.isSuccess) {
+							alert('신규 회원이 추가되었습니다.');
+							selectMemberList();
+						} else {
+							alert('신규 회원으로 등록되지 않았습니다.');
+						}
+					},
+					error: function(xhr, status, error) {
+						console.log(status + " : " + error);
+						alert('회원 등록이 실패했습니다.');
 					}
 				})
 			})

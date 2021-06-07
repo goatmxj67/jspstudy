@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.InsertMemberCommand;
 import command.MemberCommand;
 import command.SelectMemberByNoCommand;
 import command.SelectMemberListCommand;
+import command.UpdateMemberCommand;
 
 @WebServlet("*.do")
 public class MemberController extends HttpServlet {
@@ -33,6 +35,12 @@ public class MemberController extends HttpServlet {
 			break;
 		case "selectMemberByNo.do":
 			command = new SelectMemberByNoCommand();
+				break;
+		case "updateMember.do":
+			command = new UpdateMemberCommand();
+				break;
+		case "insertMember.do":
+			command = new InsertMemberCommand();
 				break;
 		}
 		
