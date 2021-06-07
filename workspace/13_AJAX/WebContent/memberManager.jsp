@@ -18,31 +18,33 @@
 		})
 		// 함수
 		// 1. 회원 목록 가져오기
-		function selectMemberList() {
+		function selectMemberList(){
 			$.ajax({
-				url: 'selectMemberList.do',
+				url: '/13_AJAX/selectMemberList.do',
 				type: 'get',
 				dataType: 'json',
 				success: function(result) {
 					/*
 						result = {
-							"list":
-								[
-									{
-										"no":5,
-										"address":"부산",
-										"gender":"여",
-										"name":"에이미",
-										"id":"user5"
-									},
-									{"no":4,"address":"대구","gender":"남","name":"스미스","id":"user4"},
-									{"no":3,"address":"대전","gender":"여","name":"제시카","id":"user3"},
-									{"no":2,"address":"인천","gender":"여","name":"앨리스","id":"user2"},
-									{"no":1,"address":"서울","gender":"남","name":"제임스","id":"user1"}
-								],
-							"isExist":true
-						}	
+							"list": [
+								{
+									"no":5,
+									"address":"부산",
+									"gender":"여",
+									"name":"에이미",
+									"id":"user5"
+								},
+								{"no":4,"address":"대구","gender":"남","name":"스미스","id":"user4"},
+								{"no":3,"address":"대전","gender":"여","name":"제시카","id":"user3"},
+								{"no":2,"address":"인천","gender":"여","name":"앨리스","id":"user2"},
+								{"no":1,"address":"서울","gender":"남","name":"제임스","id":"user1"}
+							],
+							"isExist":true	
+						}
 					*/
+					
+					// 전체 회원 수
+					$('#totalRecord').text('전체 회원: ' + result.paging.totalRecord + '명');
 					
 					// 기존의 목록을 화면에서 제거
 					$('#memberList').empty();
@@ -61,7 +63,7 @@
 				}
 			})
 		}
-		// 1-1 회원 목록을 받아서 테이블을 생성하는 함수
+		// 1-1. 회원 목록을 받아서 테이블을 생성하는 함수
 		function generateMemberList(list) {
 			$.each(list, function(i, member){
 				$('<tr>')
@@ -83,8 +85,7 @@
 			})
 			*/
 			$('body').on('click', '#view_btn', function(){
-				// 회원번호 출력하기
-				// var no = $(this).parent.parent.find('input:hidden[name="no"]').val();
+				// var no = $(this).parent().parent().find('input:hidden[name="no"]').val();
 				var no = $(this).parents('tr').find('input:hidden[name="no"]').val();
 				$.ajax({
 					url: '/13_AJAX/selectMemberByNo.do',
@@ -97,7 +98,7 @@
 								"address":"부산",
 								"gender":"여",
 								"name":"에이미",
-								"id":"user5"
+								"id":"user5",
 								"isExist":true
 							}
 						*/
@@ -140,9 +141,9 @@
 					success: function(result) {
 						if (result.isSuccess) {
 							alert('회원 정보가 수정되었습니다.');
-							selectMemberList();  // 회원 목록을  다시 만들기
+							selectMemberList();  // 회원 목록을 다시 만들기
 						} else {
-							alert('변경된 회원 정보가 없습니다.')
+							alert('변경된 회원 정보가 없습니다.');
 						}
 					},
 					error: function(xhr, status, error) {
@@ -162,13 +163,13 @@
 			})
 		}
 		// 5. 회원 추가하기
-		function insertMember() {
+		function insertMember(){
 			$('#insert_btn').click(function(){
 				var obj = {
-						id: $('#id').val(),
-						name: $('#name').val(),
-						gender: $('input:radio[name="gender"]:checked').val(),
-						address: $('#address').val()
+					id: $('#id').val(),
+					name: $('#name').val(),
+					gender: $('input:radio[name="gender"]:checked').val(),
+					address: $('#address').val()
 				};
 				// console.log(JSON.stringify(obj));
 				$.ajax({
@@ -203,6 +204,7 @@
 					</tr>
 				*/
 				var no = $(this).parent().parent().find('input:hidden[name="no"]').val();
+				// alert(no);
 				if (confirm(no + '번 회원을 삭제할까요?')) {
 					$.ajax({
 						url: '/13_AJAX/deleteMember.do',
@@ -214,7 +216,7 @@
 								alert('회원 정보가 삭제되었습니다.');
 								selectMemberList();
 							} else {
-								alert('삭제된 회원이 없습니다.')
+								alert('삭제된 회원이 없습니다.');
 							}
 						},
 						error: function(xhr, status, error) {
@@ -224,12 +226,11 @@
 					})
 				}
 			})
+			
 		}
 	</script>
 	<style>
 		* {
-			padding: 0;
-			margin: 0;
 			box-sizing: border-box;
 		}
 		.container {
@@ -278,11 +279,12 @@
 			</select><br><br>
 			<input type="button" value="회원등록" id="insert_btn">
 			<input type="button" value="정보수정" id="update_btn">
-			<input type="button" value="초기화" id="init_btn">
- 		</div>
+			<input type="button" value="초기화" id="init_btn">			
+		</div>
 		<%-- 회원목록/삭제 --%>
 		<div class="right">
 			<h3>회원목록/삭제</h3>
+			<div id="totalRecord"></div>
 			<table>
 				<thead>
 					<tr>

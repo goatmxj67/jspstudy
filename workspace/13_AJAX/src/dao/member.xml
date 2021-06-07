@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		     , ADDRESS = #{address}
 		 WHERE NO = ${no}
 	</update>
-	
+
 	<insert id="insertMember" parameterType="dto.Member">
 		INSERT INTO MEMBER
 		VALUES (MEMBER_SEQ.NEXTVAL, #{id}, #{name}, #{gender}, #{address})
@@ -38,5 +38,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM MEMBER
 		 WHERE NO = ${no}
 	</delete>
+
+	<select id="getMemberCount" resultType="int">
+		SELECT COUNT(NO)
+		  FROM MEMBER
+	</select>
 
 </mapper>

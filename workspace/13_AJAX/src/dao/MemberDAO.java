@@ -31,7 +31,6 @@ public class MemberDAO {
 		ss.close();
 		return list;
 	}
-	
 	/* 2. 회원 정보 가져오기 */
 	public Member selectMemberByNo(long no) {
 		SqlSession ss = factory.openSession();
@@ -39,7 +38,6 @@ public class MemberDAO {
 		ss.close();
 		return member;
 	}
-	
 	/* 3. 회원 정보 수정하기 */
 	public int updateMember(Member member) {
 		SqlSession ss = factory.openSession(false);
@@ -50,7 +48,6 @@ public class MemberDAO {
 		ss.close();
 		return result;
 	}
-	
 	/* 4. 회원 삽입하기 */
 	public int insertMember(Member member) {
 		SqlSession ss = factory.openSession(false);
@@ -61,7 +58,6 @@ public class MemberDAO {
 		ss.close();
 		return result;
 	}
-	
 	/* 5. 회원 삭제하기 */
 	public int deleteMember(long no) {
 		SqlSession ss = factory.openSession(false);
@@ -72,6 +68,23 @@ public class MemberDAO {
 		ss.close();
 		return result;
 	}
+	/* 6. 전체 회원 수 반환하기 */
+	public int getMemberCount() {
+		SqlSession ss = factory.openSession();
+		int count = ss.selectOne("dao.member.getMemberCount");
+		ss.close();
+		return count;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
