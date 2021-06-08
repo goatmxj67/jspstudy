@@ -85,17 +85,27 @@
 					}
 					// 1 2 3 4 5
 					for (let p = paging.beginPage; p <= paging.endPage; p++) {
-						if (paging.page == p) {
-							$('<div>' + p + '</div>').appendTo('#paging');
+						if (paging.page == p) {  // 현재 페이지는 링크가 없다.
+							// class
+							// 1. now_page : 링크가 없다. css 색상 limegreen
+							$('<div class="now_page">' + p + '</div>').appendTo('#paging');
 						} else {
-							$('<div><a>' + p + '</a></div>').appendTo('#paging');
+							// class
+							// 1. go_page : click 이벤트에서 사용
+							// 2. link : 링크가 있다. css 포인터
+							$('<div class="go_page link" data-page="' + (p) + '">' + p + '</div>').appendTo('#paging');
 						}
 					}
 					// 다음
-					if (paging.endPage == paging.totalPage) {
-						$('<div>다음</div>').appendTo('#paging');
+					if (paging.endPage == paging.totalPage) {  // 링크가 없는 마지막 블록
+						// class
+						// 1. disable : 링크가 없다. css 색상 lightgray
+						$('<div class="disable">다음</div>').appendTo('#paging');
 					} else {
-						$('<div><a>다음</a></div>').appendTo('#paging');
+						// class
+						// 1. next_block : click 이벤트에서 사용
+						// 2. link : 링크가 있다. css 포인터
+						$('<div class="next_block link" data-page="' + (paging.endPage + 1) + '">다음</div>').appendTo('#paging');
 					}
 				},
 				error: function(xhr, status, error) {
@@ -123,7 +133,15 @@
 			$('body').on('click', '.prev_block', function(){
 				page = $(this).data('page');
 				selectMemberList();
-			})	
+			})
+			$('body').on('click', '.go_page', function(){
+				page = $(this).data('page');
+				selectMemberList();
+			})
+			$('body').on('click', '.next_block', function(){
+				page = $(this).data('page');
+				selectMemberList();
+			})
 		}
 		// 2. 회원 정보 가져오기
 		function selectMemberByNo() {
@@ -317,6 +335,9 @@
 		}
 		.link {
 			cursor: pointer;
+		}
+		.now_page {
+			color: limegreen;
 		}
 	</style>
 </head>
