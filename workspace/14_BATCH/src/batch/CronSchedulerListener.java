@@ -29,7 +29,7 @@ public class CronSchedulerListener implements ServletContextListener {
 	@Override
     public void contextInitialized(ServletContextEvent sce)  { 
     	System.out.println("=====WEB SERVICE START!=====");
-    	cronScheduler = new CronScheduler("0 30 17 ? * TUE *", Top3StudentJob.class);
+    	cronScheduler = new CronScheduler("0 51 17 ? * TUE *", Top3StudentJob.class);
     	cronScheduler.execute();
     }
 	
