@@ -1,7 +1,7 @@
 package batch;
 
 import org.quartz.CronScheduleBuilder;
-import org.quartz.CronTrigger;
+import org.quartz.CronTrigger; 
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
