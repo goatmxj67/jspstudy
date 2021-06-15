@@ -1,0 +1,26 @@
+boardList.jsp
+updateBoard.jsp
+updatePage.jsp
+view.jsp
+
+BoardDAO.java 
+
+PageVO.java
+-----------------------
+boardList.jsp
+BoardDAO.java 
+
+-----------------------
+
+HR 계정 없는 경우
+
+1. SYSTEM 접속
+2. 잠금해제
+   ALTER USER HR ACCOUNT UNLOCK;
+3. 비번등록
+   ALTER USER HR IDENTIFIED BY 1111;
+4. HR 접속 생성
+
+
+
+
