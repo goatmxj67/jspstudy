@@ -6,9 +6,7 @@
   The ASF licenses this file to You under the Apache License, Version 2.0
   (the "License"); you may not use this file except in compliance with
   the License.  You may obtain a copy of the License at
-
       http://www.apache.org/licenses/LICENSE-2.0
-
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -153,11 +151,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-<<<<<<< HEAD
-      <Context docBase="10_MODEL2" path="/10_MODEL2" reloadable="true" source="org.eclipse.jst.jee.server:10_MODEL2"/></Host>
-=======
-      <Context docBase="14_BATCH" path="/14_BATCH" reloadable="true" source="org.eclipse.jst.jee.server:14_BATCH"/></Host>
->>>>>>> refs/remotes/origin/main
+      <Context docBase="InterfaceProject" path="/InterfaceProject" reloadable="true" source="org.eclipse.jst.jee.server:InterfaceProject"/></Host>
     </Engine>
   </Service>
 </Server>
